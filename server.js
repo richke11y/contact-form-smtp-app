@@ -6,7 +6,6 @@ import createApp from './app.js';
 async function startServer() {
 
 	const devENV = process.env.NODE_ENV === 'development' ? true : false;
-
 	const PORT = process.env.PORT;
 
 	const transporter = await nodemailerCreateTransport();
