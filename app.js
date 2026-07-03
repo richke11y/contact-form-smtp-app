@@ -10,12 +10,16 @@ import submitFormRoute from './routes/submit-form-route.js';
 
 export default function createApp(transporter) {
 
-	const app = express();
-
 	const devENV = process.env.NODE_ENV === 'development' ? true : false;
+
+	const app = express();
 
 	// Development only: Serve static pages from ./public directory
 	if (devENV) app.use(express.static('public'));
+
+	// Tell Express to trust the first proxy in front of app.
+	// Without express-rate-limit cannot determine client's IP address.
+	if (!devENV) app.set('trust proxy', 1);
 
 	app.use((req, res, next) => {
 		console.log(req.method, req.path);
