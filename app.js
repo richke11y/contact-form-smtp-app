@@ -1,7 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv/config';
 
-// import corsHeaders from './middlewear/cors.js';
+import corsHeaders from './middlewear/cors.js';
 import rateLimiter from './middlewear/rate-limit.js';
 import honeypot from './middlewear/honeypot.js';
 import validateSanitise from './middlewear/validate-sanitise.js';
@@ -18,7 +18,7 @@ export default function createApp(transporter) {
 	if (devENV) app.use(express.static('public'));
 
 	// Tell Express to trust the first proxy in front of app.
-	// Without express-rate-limit cannot determine client's IP address.
+	// Without this express-rate-limit cannot determine client's IP address.
 	if (!devENV) app.set('trust proxy', 1);
 
 	app.use((req, res, next) => {
@@ -28,13 +28,13 @@ export default function createApp(transporter) {
 
 	// POST to /submit-form route
 	app.post('/submit-form', 
-		// corsHeaders, // Check CORS headers
-		rateLimiter, // Rate limit
+		corsHeaders,
+		rateLimiter,
 		express.json(), // Parses POST request with a Content-Type of application/json
 		express.urlencoded({ extended: true }), // Parses URL-encoded payload from the Contact Form.
-		honeypot, // Check if honeypot field has been filled.
-		validateSanitise, // Validate and sanitise posted data
-		validateErrors, // Validation errors
+		honeypot,
+		validateSanitise,
+		validateErrors,
 		(req, res) => submitFormRoute(transporter, req, res)
 	);
 
