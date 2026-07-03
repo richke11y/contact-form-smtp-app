@@ -18,9 +18,10 @@ export default async function sendTheMail(transporter, { name, email, message })
 
 	try {
 
-		const info = await transporter.sendMail(messageObject);
+		await transporter.sendMail(messageObject);
 
-		console.log(info);
+		// const info = await transporter.sendMail(messageObject);
+		// console.log(info);
 
 		return { 
 			success: true,
