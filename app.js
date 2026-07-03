@@ -16,7 +16,12 @@ export default function createApp(transporter) {
 
 	// Development only: Serve static pages from ./public directory
 	if (devENV) app.use(express.static('public'));
-	
+
+	app.use((req, res, next) => {
+		console.log(req.method, req.path);
+		next();
+	});
+
 	// POST to /submit-form route
 	app.post('/submit-form', 
 		// corsHeaders, // Check CORS headers
