@@ -14,14 +14,11 @@ export default async function sendTheMail(transporter, { name, email, message })
 		subject: 'New Contact Form Submission',
 		text: `Name: ${name}. Email: ${email}. Message: ${message}`,
 		html: `<p>Name: ${name}.</p> <p>Email: <a href="mailto:${email}" target="_blank" rel="noopener noreferrer" title="${email}">${email}</a>.</p> <p>Message: ${message}</p>`
-	}
+	};
 
 	try {
 
 		await transporter.sendMail(messageObject);
-
-		// const info = await transporter.sendMail(messageObject);
-		// console.log(info);
 
 		return { 
 			success: true,
