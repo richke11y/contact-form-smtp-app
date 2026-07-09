@@ -3,9 +3,9 @@
 
 import dotenv from 'dotenv/config';
 
-export default async function sendTheConfirmation(transporter, { name, email, message }) {
+export default async function sendTheConfirmationMail(transporter, { name, email, message }) {
 
-	console.log('sendTheConfirmation()');
+	console.log('sendTheConfirmationMail()');
 
 	const messageObject = {
 		from: process.env.EMAIL_FROM,
@@ -19,9 +19,7 @@ export default async function sendTheConfirmation(transporter, { name, email, me
 
 	try {
 
-		const info = await transporter.sendMail(messageObject);
-
-		console.log(info);
+		await transporter.sendMail(messageObject);
 
 	} catch(error) {
 
