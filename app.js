@@ -17,19 +17,20 @@ export default function createApp(transporter) {
 	// Development only: Serve static pages from ./public directory
 	if (devENV) app.use(express.static('public'));
 
-	// Tell Express to trust the first proxy in front of app.
-	// Without this express-rate-limit cannot determine client's IP address.
 	if (!devENV) {
-		
+
+		// Tell Express to trust the first proxy in front of app.
+		// Without this express-rate-limit cannot determine client's IP address.
 		app.set('trust proxy', 1);
 
+		// CORS
 		app.use(cors({
 			origin: process.env.CORS_ORIGIN,
 			methods: ['POST'],
 			allowedHeaders: ['Content-Type'],
 			optionsSuccessStatus: 200
 		}));
-	
+
 	}
 
 	app.use((req, res, next) => {
