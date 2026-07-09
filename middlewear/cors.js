@@ -10,6 +10,8 @@ export default function corsHeaders(req, res, next) {
 
 	cors({
 		origin: process.env.CORS_ORIGIN,
+		methods: 'POST',
+		allowedHeaders: 'Content-Type,application/json',
 		optionsSuccessStatus: 200
 	});
 
