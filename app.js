@@ -2,7 +2,6 @@ import express from 'express';
 import dotenv from 'dotenv/config';
 import cors from 'cors';
 
-// import corsHeaders from './middlewear/cors.js';
 import rateLimiter from './middlewear/rate-limit.js';
 import honeypot from './middlewear/honeypot.js';
 import validateSanitise from './middlewear/validate-sanitise.js';
@@ -40,7 +39,6 @@ export default function createApp(transporter) {
 
 	// POST to /submit-form route
 	app.post('/submit-form', 
-		// corsHeaders,
 		rateLimiter,
 		express.json(), // Parses POST request with a Content-Type of application/json
 		express.urlencoded({ extended: true }), // Parses URL-encoded payload from the Contact Form.
