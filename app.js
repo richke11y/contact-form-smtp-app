@@ -25,12 +25,12 @@ export default function createApp(transporter) {
 		app.set('trust proxy', 1);
 
 		app.use(cors({
-			origin: 'https://richkelly.uk'
-			// origin: process.env.CORS_ORIGIN,
-			// methods: 'POST',
-			// allowedHeaders: 'Content-Type,application/json',
-			// optionsSuccessStatus: 200
-		}))
+			// origin: 'https://richkelly.uk'
+			origin: process.env.CORS_ORIGIN,
+			methods: ['POST'],
+			allowedHeaders: ['Content-Type'],
+			optionsSuccessStatus: 200
+		}));
 	
 	}
 
