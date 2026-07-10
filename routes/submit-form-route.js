@@ -12,9 +12,6 @@ export default async function submitFormRoute(transporter, req, res, next) {
 		console.log('REQ.BODY:');
 		console.log(req.body);
 
-		console.log('REQ.IP:');
-		console.log(req.ip);
-
 		const { name, email, message } = matchedData(req);
 
 		const result = await sendTheMail(transporter, { name, email, message });
