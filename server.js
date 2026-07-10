@@ -1,40 +1,47 @@
-import dotenv from 'dotenv/config';
+import envConfig from './env-config.js';
 
 import nodemailerCreateTransport from './nodemailer/nodemailer-create-transport.js';
 import createApp from './app.js';
 
 async function startServer() {
 
-	const devENV = process.env.NODE_ENV === 'development' ? true : false;
-	const PORT = process.env.PORT;
+	const { NODE_ENV, PORT } = envConfig;
 
-	const transporter = await nodemailerCreateTransport();
+	const devENV = NODE_ENV === 'development' ? true : false;
 
-	await transporter.verify();
-	
-	console.log('NodeMailer SMTP Verified');
+	console.log(`Running in ${NODE_ENV} mode`);
 
-	const app = await createApp(transporter);
+	try {
 
-	app.listen(PORT, () => {
+		const transporter = await nodemailerCreateTransport();
 
-		if (devENV) {
+		await transporter.verify();
+		
+		console.log('NodeMailer SMTP Verified');
 
-			console.log(`Listening at http://localhost:${PORT}`)
+		const app = await createApp(transporter);
 
-		} else {
+		app.listen(PORT, () => {
 
-			console.log(`Server listening on port ${PORT}.`)
+			if (devENV) {
 
-		}
+				console.log(`Listening at http://localhost:${PORT}`)
 
-	});
+			} else {
+
+				console.log(`Server listening on port ${PORT}`)
+
+			}
+
+		});
+
+	} catch(error) {
+
+		console.error('FAILED TO START SERVER', err);
+		process.exit(1);
+
+	}
 
 };
 
-startServer().catch(err => {
-
-	console.error('FAILED TO START SERVER', err);
-	process.exit(1);
-
-});
+startServer();
