@@ -1,8 +1,5 @@
 import dotenv from 'dotenv/config';
 
-//nodejs.org/api/process.html#processloadenvfilepath
-// process.loadEnvFile('.env');
-
 const envConfig = {
 	NODE_ENV: process.env.NODE_ENV,
 	PORT: parseInt(process.env.PORT, 10),
