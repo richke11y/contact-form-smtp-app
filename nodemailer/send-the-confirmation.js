@@ -1,15 +1,16 @@
 //nodemailer.com/
 //github.com/nodemailer/nodemailer
-
-import dotenv from 'dotenv/config';
+import envConfig from '../env-config.js';
 
 export default async function sendTheConfirmationMail(transporter, { name, email, message }) {
 
 	console.log('sendTheConfirmationMail()');
 
+	const { EMAIL_FROM, EMAIL_TO } = envConfig;
+
 	const messageObject = {
-		from: process.env.EMAIL_FROM,
-		replyTo: process.env.EMAIL_TO,
+		from: EMAIL_FROM,
+		replyTo: EMAIL_TO,
 		to: email,
 		subject: 'Contact Form Confirmation',
 		html: `<p>Hi ${name}. Thank you for your message. We will try and get back to you as soon as possible.</p>

@@ -1,16 +1,17 @@
 //nodemailer.com/
 //github.com/nodemailer/nodemailer
-
-import dotenv from 'dotenv/config';
+import envConfig from '../env-config.js';
 
 export default async function sendTheMail(transporter, { name, email, message }) {
 
 	console.log('sendTheMail()');
 
+	const { EMAIL_FROM, EMAIL_TO } = envConfig;
+
 	const messageObject = {
-		from: process.env.EMAIL_FROM,
+		from: EMAIL_FROM,
 		replyTo: `"${name}" <${email}>`,
-		to: process.env.EMAIL_TO,
+		to: EMAIL_TO,
 		subject: 'New Contact Form Submission',
 		text: `Name: ${name}. Email: ${email}. Message: ${message}`,
 		html: `<p>Name: ${name}.</p> <p>Email: <a href="mailto:${email}" target="_blank" rel="noopener noreferrer" title="${email}">${email}</a>.</p> <p>Message: ${message}</p>`
