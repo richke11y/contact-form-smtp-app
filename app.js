@@ -1,6 +1,7 @@
 import express from 'express';
-import dotenv from 'dotenv/config';
 import cors from 'cors';
+
+import envConfig from './env-config.js';
 
 import rateLimiter from './middlewear/rate-limit.js';
 import honeypot from './middlewear/honeypot.js';
@@ -10,7 +11,9 @@ import submitFormRoute from './routes/submit-form-route.js';
 
 export default function createApp(transporter) {
 
-	const devENV = process.env.NODE_ENV === 'development' ? true : false;
+	const { NODE_ENV, CORS_ORIGIN } = envConfig;
+
+	const devENV = NODE_ENV === 'development' ? true : false;
 
 	const app = express();
 
@@ -25,7 +28,7 @@ export default function createApp(transporter) {
 
 		// CORS
 		app.use(cors({
-			origin: process.env.CORS_ORIGIN,
+			origin: CORS_ORIGIN,
 			methods: ['POST'],
 			allowedHeaders: ['Content-Type'],
 			optionsSuccessStatus: 200
