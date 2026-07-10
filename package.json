@@ -8,7 +8,7 @@
   "main": "server.js",
   "scripts": {
     "start": "server.js",
-    "development": "NODE_ENV=development nodemon server.js",
+    "development": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
