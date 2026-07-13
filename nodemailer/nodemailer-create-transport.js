@@ -10,6 +10,7 @@ export default function nodemailerCreateTransport() {
 	const { SMTP_HOST, SMTP_PORT, SMTP_SECURE, SMTP_USER, SMTP_PASS } = envConfig
 
 	const transporter = nodemailer.createTransport({
+		pool: true,
 		host: SMTP_HOST,
 		port: SMTP_PORT,
 		secure: false,
