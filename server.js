@@ -16,7 +16,9 @@ async function startServer() {
 
 		const transporter = await nodemailerCreateTransport();
 
+		console.time('verify');
 		await transporter.verify();
+		console.timeEnd('verify');
 		
 		console.log('NodeMailer SMTP Verified');
 
