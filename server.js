@@ -10,6 +10,7 @@ async function startServer() {
 	const devENV = NODE_ENV === 'development' ? true : false;
 
 	console.log(`Running in ${NODE_ENV} mode`);
+	console.log(`PORT: ${PORT}`);
 
 	try {
 
