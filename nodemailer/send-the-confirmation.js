@@ -4,8 +4,6 @@ import envConfig from '../env-config.js';
 
 export default async function sendTheConfirmationMail(transporter, { name, email, message }) {
 
-	console.log('sendTheConfirmationMail()');
-
 	const { EMAIL_FROM, EMAIL_TO } = envConfig;
 
 	const messageObject = {
@@ -20,7 +18,9 @@ export default async function sendTheConfirmationMail(transporter, { name, email
 
 	try {
 
+		console.timeLog('Submit Time', 'sendTheConfirmationMail() start');
 		await transporter.sendMail(messageObject);
+		console.timeLog('Submit Time', 'sendTheConfirmationMail() end');
 
 	} catch(error) {
 

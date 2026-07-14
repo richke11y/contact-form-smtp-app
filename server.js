@@ -5,22 +5,20 @@ import createApp from './app.js';
 
 async function startServer() {
 
+	console.time('Time');
+
 	const { NODE_ENV, PORT } = envConfig;
 
 	const devENV = NODE_ENV === 'development' ? true : false;
 
-	console.log(`Running in ${NODE_ENV} mode`);
-	console.log(`PORT: ${PORT}`);
+	console.timeLog('Time', `Running ${NODE_ENV} mode. PORT: ${PORT}`);
 
 	try {
 
 		const transporter = await nodemailerCreateTransport();
 
-		console.time('verify');
 		await transporter.verify();
-		console.timeEnd('verify');
-		
-		console.log('NodeMailer SMTP Verified');
+		console.timeLog('Time', 'NodeMailer SMTP Verified');
 
 		const app = await createApp(transporter);
 
@@ -28,11 +26,11 @@ async function startServer() {
 
 			if (devENV) {
 
-				console.log(`Listening at http://localhost:${PORT}`)
+				console.timeLog('Time', `Listening at http://localhost:${PORT}`);
 
 			} else {
 
-				console.log(`Server listening on port ${PORT}`)
+				console.timeLog('Time', `Listening at http://localhost:${PORT}`);
 
 			}
 
@@ -40,10 +38,14 @@ async function startServer() {
 
 	} catch(error) {
 
+		// console.timeLog('Time', 'Error');
 		console.error('FAILED TO START SERVER', error);
+
 		process.exit(1);
 
 	}
+
+	// console.timeEnd('Time');
 
 };
 

@@ -5,11 +5,11 @@ import sendTheConfirmationMail from '../nodemailer/send-the-confirmation.js';
 
 export default async function submitFormRoute(transporter, req, res, next) {
 
-	console.log('submitFormRoute()');
+	console.time('Submit Time')
 
 	try {
 
-		console.log('REQ.BODY:');
+		console.timeLog('Submit Time', 'Request Body');
 		console.log(req.body);
 
 		const { name, email, message } = matchedData(req);
@@ -23,6 +23,8 @@ export default async function submitFormRoute(transporter, req, res, next) {
 		}
 
 		await sendTheConfirmationMail(transporter, { name, email, message });
+
+		console.timeLog('Submit Time', 'Return response', result);
 
 		return res.status(200).json(result);
 
@@ -40,5 +42,7 @@ export default async function submitFormRoute(transporter, req, res, next) {
 	}
 
 	next();
+
+	console.timeEnd('Submit Time');
 
 }
