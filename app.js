@@ -11,8 +11,6 @@ import submitFormRoute from './routes/submit-form-route.js';
 
 export default function createApp(transporter) {
 
-	console.timeLog('Time', 'createApp()');
-
 	const { NODE_ENV, CORS_ORIGIN } = envConfig;
 
 	const devENV = NODE_ENV === 'development' ? true : false;
@@ -42,9 +40,13 @@ export default function createApp(transporter) {
 		express.json(), // Parses POST request with a Content-Type of application/json
 		express.urlencoded({ extended: true }), // Parses URL-encoded payload from the Contact Form.
 		(req, res, next) => {
+
 			console.log(req.method, req.path);
+
 			next();
+
 		}
+
 	);
 
 	// Listen for POST to /submit-form route

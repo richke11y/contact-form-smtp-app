@@ -5,8 +5,6 @@ import sendTheConfirmationMail from '../nodemailer/send-the-confirmation.js';
 
 export default async function submitFormRoute(transporter, req, res, next) {
 
-	console.time('Submit Time')
-
 	try {
 
 		console.timeLog('Submit Time', 'Request Body');

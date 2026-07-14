@@ -5,8 +5,6 @@ import envConfig from '../env-config.js';
 
 export default function nodemailerCreateTransport() {
 
-	console.timeLog('Time', 'nodemailerCreateTransport()');
-
 	const { SMTP_HOST, SMTP_PORT, SMTP_SECURE, SMTP_USER, SMTP_PASS } = envConfig
 
 	const transporter = nodemailer.createTransport({
