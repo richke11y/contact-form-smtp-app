@@ -30,7 +30,7 @@ async function startServer() {
 
 			} else {
 
-				console.timeLog('Time', `Listening at http://localhost:${PORT}`);
+				console.timeLog('Time', `Server listening on ${PORT}`);
 
 			}
 
