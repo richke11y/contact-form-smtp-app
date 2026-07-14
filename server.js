@@ -27,11 +27,11 @@ import createApp from './app.js';
 
 			if (devENV) {
 
-				console.timeLog('Time', `Listening at http://localhost:${PORT}`);
+				console.log(`Listening at http://localhost:${PORT}`);
 
 			} else {
 
-				console.timeLog('Time', `Server listening on ${PORT}`);
+				console.log(`Server listening on ${PORT}`);
 
 			}
 
@@ -39,12 +39,14 @@ import createApp from './app.js';
 
 	} catch(error) {
 
+		console.timeLog('Time', 'Error Logged');
+
 		console.error('FAILED TO START SERVER', error);
 
 		process.exit(1);
 
 	}
 
-	// console.timeEnd('Time');
+	console.timeEnd('Time');
 
 }());
