@@ -3,7 +3,7 @@ import envConfig from './env-config.js';
 import nodemailerCreateTransport from './nodemailer/nodemailer-create-transport.js';
 import createApp from './app.js';
 
-async function startServer() {
+(async function () {
 
 	console.time('Time');
 
@@ -18,6 +18,7 @@ async function startServer() {
 		const transporter = await nodemailerCreateTransport();
 
 		await transporter.verify();
+
 		console.timeLog('Time', 'NodeMailer SMTP Verified');
 
 		const app = await createApp(transporter);
@@ -38,7 +39,6 @@ async function startServer() {
 
 	} catch(error) {
 
-		// console.timeLog('Time', 'Error');
 		console.error('FAILED TO START SERVER', error);
 
 		process.exit(1);
@@ -47,6 +47,4 @@ async function startServer() {
 
 	// console.timeEnd('Time');
 
-};
-
-startServer();
+}());
