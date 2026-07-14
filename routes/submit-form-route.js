@@ -24,7 +24,8 @@ export default async function submitFormRoute(transporter, req, res, next) {
 
 		await sendTheConfirmationMail(transporter, { name, email, message });
 
-		console.timeLog('Submit Time', 'Return response', result);
+		console.timeLog('Submit Time', 'Response', result);
+		console.timeEnd('Submit Time');
 
 		return res.status(200).json(result);
 
@@ -42,7 +43,5 @@ export default async function submitFormRoute(transporter, req, res, next) {
 	}
 
 	next();
-
-	console.timeEnd('Submit Time');
 
 }
